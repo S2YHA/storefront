@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SfHeader
+    <!-- <SfHeader
       data-cy="app-header"
       :search-value="term"
       :cart-items-qty="cartTotalItems"
@@ -17,7 +17,6 @@
       @enter:search="changeSearchTerm"
       @change:search="(p) => (term = p)"
     >
-      <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
         <nuxt-link :to="localePath('/')" class="sf-header__logo">
           <SfImage
@@ -28,22 +27,6 @@
             :height="34"
           />
         </nuxt-link>
-      </template>
-
-      <template v-if="menus.length > 0" #navigation>
-        <div class="navigation-wrapper">
-          <SfHeaderNavigationItem
-            v-for="menu in menus"
-            :key="menu.id"
-            class="nav-item"
-            :data-cy="'app-header-url_' + menu.handle"
-            :label="menu.title"
-            :link="localePath(getMenuPath(menu))"
-          />
-        </div>
-      </template>
-      <template #aside>
-        <LocaleSelector class="smartphone-only" />
       </template>
       <template #header-icons>
         <div class="sf-header__icons">
@@ -87,6 +70,27 @@
           @input="handleSearch"
           @focus="isSearchOpen = true"
         ></SfSearchBar>
+      </template>
+    </SfHeader> -->
+    <template>
+      <div><hr class="sf-divider" /></div>
+    </template>
+    <SfHeader
+      data-cy="app-header"
+      class="sf-header--has-mobile-search"
+      :class="{ 'header-on-top': isSearchOpen }"
+    >
+      <template v-if="menus.length > 0" #navigation>
+        <div class="navigation-wrapper">
+          <SfHeaderNavigationItem
+            v-for="menu in menus"
+            :key="menu.id"
+            class="nav-item"
+            :data-cy="'app-header-url_' + menu.handle"
+            :label="menu.title"
+            :link="localePath(getMenuPath(menu))"
+          />
+        </div>
       </template>
     </SfHeader>
     <SearchResults
